@@ -2,6 +2,8 @@ import { Injectable, Logger } from '@nestjs/common'
 import { Promise as Bluebird } from 'bluebird'
 import { SeederInterface } from './seeder.interface'
 import { ResetTotalDataSeed } from './generation/resetTotalDataSeed'
+import { BoardSeed } from './generation/boardSeed'
+import { UserSeed } from './generation/userSeed'
 
 
 const isProdaction = process.env.NODE_ENV === 'prodaction'
@@ -13,21 +15,21 @@ export class SeedService {
 
   constructor(
     private readonly resetTotalDataSeed: ResetTotalDataSeed,
-    // private readonly userSeed: UserSeed,
-    // private readonly roleSeed: RoleSeeder,
+    private readonly userSeed: UserSeed,
+    private readonly boardSeed: BoardSeed,
 
   ) {
     this.seeders = isProdaction
       ? [
         this.resetTotalDataSeed,
-        // this.roleSeed,
-        // this.userSeed,
+        this.boardSeed,
+        this.userSeed,
 
       ]
       : [
         this.resetTotalDataSeed,
-        // this.roleSeed,
-        // this.userSeed,
+        this.boardSeed,
+        this.userSeed,
 
 
       ]

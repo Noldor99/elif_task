@@ -23,7 +23,7 @@ export class CreateBoardDto {
   })
   @IsNotEmpty()
   @IsISO8601()
-  readonly eventDate: string;
+  readonly eventDate: Date;
 
   @ApiProperty({
     example: 'John Doe',
