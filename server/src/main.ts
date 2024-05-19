@@ -17,6 +17,19 @@ async function start() {
   app.useGlobalPipes(new ValidationPipe());
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
+  app.use((req, res, next) => {
+    const allowedOrigins = ['https://elif-task-tvaf-55v0x8muc-noldor99s-projects.vercel.app/', `http://localhost:${PORT}`];
+
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+      res.header('Access-Control-Allow-Origin', origin);
+      res.header('Access-Control-Allow-Credentials', 'true');
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
+
+    next();
+  });
+
 
   const config = new DocumentBuilder()
     .setTitle('Cloud storage')
