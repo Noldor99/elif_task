@@ -18,7 +18,7 @@ async function start() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   app.use((req, res, next) => {
-    const allowedOrigins = ['https://elif-task-tvaf-55v0x8muc-noldor99s-projects.vercel.app/', `http://localhost:${PORT}`];
+    const allowedOrigins = ['https://elif-task-tvaf.vercel.app', `http://localhost:${PORT}`];
 
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
