@@ -30,6 +30,9 @@ const BoardID = () => {
           <UserCard key={idx} user={item} />
         ))}
       </div>
+      {board?.users?.length === 0 && (
+        <div className="paper-rounded flex justify-center"> ~list empty~</div>
+      )}
     </div>
   )
 }
