@@ -21,12 +21,19 @@ export class UserService {
   }
 
   async getAll(dto: QueryUserParamsDto) {
-    const { page = 1, limit = 4 } = dto;
+    const { page = 1, limit = 4, search } = dto;
     try {
       let queryBuilder = this.userRepository.createQueryBuilder('user')
         .orderBy('user.createdAt', 'DESC')
         .skip((+page - 1) * +limit)
         .take(+limit);
+
+      if (search) {
+        queryBuilder = queryBuilder
+          .where(
+            '(user.name LIKE :search OR user.email LIKE :search)',
+            { search: `%${search}%` });
+      }
 
       const [users, totalCount] = await queryBuilder.getManyAndCount();
 

@@ -1,4 +1,4 @@
-import { IsOptional } from 'class-validator';
+import { IsIn, IsOptional } from 'class-validator';
 
 export class QueryBoardParamsDto {
   @IsOptional()
@@ -6,4 +6,9 @@ export class QueryBoardParamsDto {
 
   @IsOptional()
   limit?: string;
+
+  @IsIn(['all', 'title', 'eventDate', 'organizer'])
+  sort?: 'all' | 'title' | 'eventDate' | 'organizer'
+
+
 }

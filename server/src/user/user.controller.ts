@@ -30,6 +30,7 @@ export class UserController {
   @Get()
   @ApiQuery({ name: 'page', type: Number, required: false, example: 1 })
   @ApiQuery({ name: 'limit', type: Number, required: false, example: 4 })
+  @ApiQuery({ name: 'search', type: String, required: false })
   getAll(@Query() params: QueryUserParamsDto) {
     return this.userService.getAll(params);
 

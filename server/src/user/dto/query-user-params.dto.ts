@@ -6,4 +6,7 @@ export class QueryUserParamsDto {
 
   @IsOptional()
   limit?: string;
+
+  @IsOptional()
+  search?: string;
 }

@@ -8,7 +8,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @Length(3, 255)
-  readonly Name: string;
+  readonly name: string;
 
   @ApiProperty({
     example: 'simple@gmail.com',

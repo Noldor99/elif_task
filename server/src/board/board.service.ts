@@ -21,12 +21,23 @@ export class BoardService {
   }
 
   async getAll(dto: QueryBoardParamsDto) {
-    const { page = 1, limit = 4 } = dto;
+    const { page = 1, limit = 4, sort } = dto;
     try {
       let queryBuilder = this.boardRepository.createQueryBuilder('board')
-        .orderBy('board.createdAt', 'DESC')
         .skip((+page - 1) * +limit)
         .take(+limit);
+
+      if (sort === 'eventDate') {
+        queryBuilder = queryBuilder.addOrderBy('board.eventDate', 'ASC');
+      } else if (sort === 'organizer') {
+        queryBuilder = queryBuilder.addOrderBy('board.organizer', 'ASC');
+      } else if (sort === 'title') {
+        queryBuilder = queryBuilder.addOrderBy('board.title', 'ASC');
+      } else {
+        queryBuilder = queryBuilder.addOrderBy('board.createdAt', 'DESC');
+      }
+
+
 
       const [boards, totalCount] = await queryBuilder.getManyAndCount();
 
@@ -35,6 +46,7 @@ export class BoardService {
       return { totalCount: 0, boards: [] };
     }
   }
+
 
 
   async findOne(id: string): Promise<Board> {

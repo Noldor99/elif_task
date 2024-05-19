@@ -27,7 +27,7 @@ export class UserSeed implements SeederInterface {
       const data = faker.date.between(`${birthYear}-01-01`, `${birthYear}-12-31`);
 
       const userSeed: CreateUserDto = {
-        Name: faker.person.firstName(),
+        name: faker.person.firstName(),
         email: faker.internet.email(),
         hear: 'Friends',
         birth: data,

@@ -30,6 +30,13 @@ export class BoardController {
   @Get()
   @ApiQuery({ name: 'page', type: Number, required: false, example: 1 })
   @ApiQuery({ name: 'limit', type: Number, required: false, example: 4 })
+  @ApiQuery({
+    name: 'sort',
+    required: false,
+    type: String,
+    enum: ['all', 'title', 'eventDate', 'organizer'],
+  })
+
   getAll(@Query() params: QueryBoardParamsDto) {
     return this.boardService.getAll(params);
 

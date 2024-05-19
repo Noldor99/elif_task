@@ -9,8 +9,7 @@ export class Board {
   title: string;
 
   @Column()
-  organizer
-    : string;
+  organizer: string;
 
   @Column()
   description: string;
