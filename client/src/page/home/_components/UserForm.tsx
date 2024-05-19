@@ -27,10 +27,11 @@ const radioItems: TRadioItem[] = [
 type UserFormPropsType = {
   user?: IUser
   handleClose: () => void
+  boardId?: string
 }
 
 export const UserForm: FC<UserFormPropsType> = (props: UserFormPropsType) => {
-  const { user, handleClose } = props
+  const { user, handleClose, boardId } = props
 
   const form = useForm<IUserSchema>({
     mode: "onChange",
@@ -73,9 +74,10 @@ export const UserForm: FC<UserFormPropsType> = (props: UserFormPropsType) => {
       {} as IUserSchema
     )
 
+    const dirtyFieldsAdd = { ...changedFields, boardId: boardId }
     const mutation = user ? updateUser : createUser
 
-    mutation(changedFields, {
+    mutation(dirtyFieldsAdd, {
       onSuccess: () => {
         handleClose()
         toast({

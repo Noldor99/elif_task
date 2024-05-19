@@ -32,4 +32,11 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsISO8601()
   readonly birth: Date;
+
+  @ApiProperty({
+    example: 'dfsafdassc',
+  })
+  @IsNotEmpty()
+  @IsString()
+  readonly boardId?: string;
 }

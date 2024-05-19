@@ -15,7 +15,7 @@ export class BoardSeed implements SeederInterface {
 
   async seed() {
 
-    for (let i = 50; i > 0; i--) {
+    for (let i = 12; i > 0; i--) {
 
       const boardSeed: CreateBoardDto = {
         title: faker.lorem.words(),

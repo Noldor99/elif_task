@@ -5,12 +5,14 @@ import { Repository } from "typeorm"
 import { CreateBoardDto } from "./dto/create-board.dto"
 import { QueryBoardParamsDto } from "./dto/query-board-params.dto"
 import { UpdateBoardDto } from "./dto/update-board.dto"
+import { UserService } from "src/user/user.service"
 
 @Injectable()
 export class BoardService {
   constructor(
     @InjectRepository(Board)
-    private boardRepository: Repository<Board>
+    private boardRepository: Repository<Board>,
+    private readonly userService: UserService,
   ) { }
 
 
@@ -36,9 +38,6 @@ export class BoardService {
       } else {
         queryBuilder = queryBuilder.addOrderBy('board.createdAt', 'DESC');
       }
-
-
-
       const [boards, totalCount] = await queryBuilder.getManyAndCount();
 
       return { totalCount, boards };
@@ -52,7 +51,7 @@ export class BoardService {
   async findOne(id: string): Promise<Board> {
     const board = await this.boardRepository.findOne({
       where: { id },
-      relations: {},
+      relations: { users: true },
     })
 
     if (!board) {
@@ -80,7 +79,14 @@ export class BoardService {
 
   async remove(id: string) {
     const board = await this.findOne(id);
-    return this.boardRepository.remove(board)
+
+    if (board.users && board.users.length > 0) {
+      for (const user of board.users) {
+        await this.userService.remove(user.id);
+      }
+    }
+
+    return this.boardRepository.remove(board);
   }
 
 }

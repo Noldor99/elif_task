@@ -8,16 +8,17 @@ export const BoardSchema = z.object({
   title: z
     .string()
     .min(3, { message: 'Title must be at least 3 characters.' })
-    .max(50, { message: 'Title must be at most 50 characters.' }),
+    .max(150, { message: 'Title must be at most 150 characters.' }),
   organizer: z
     .string()
     .min(3, { message: 'Organizer must be at least 3 characters.' })
-    .max(50, { message: 'Organizer must be at most 50 characters.' }),
+    .max(150, { message: 'Organizer must be at most 150 characters.' }),
   description: z
     .string()
     .min(3, { message: 'Description must be at least 3 characters.' })
-    .max(150, { message: 'Description must be at most 150 characters.' }),
+    .max(350, { message: 'Description must be at most 350 characters.' }),
   eventDate: z.date(),
+
 });
 
 export type IBoardSchema = z.infer<typeof BoardSchema>

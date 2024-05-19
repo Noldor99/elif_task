@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { User } from 'src/user/user.entity';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('board')
 export class Board {
@@ -16,6 +17,10 @@ export class Board {
 
   @Column()
   eventDate: Date;
+
+  @OneToMany(() => User, (user) => user.board)
+  @JoinColumn({ name: 'userId' })
+  users: User[];
 
   @CreateDateColumn()
   createdAt: Date

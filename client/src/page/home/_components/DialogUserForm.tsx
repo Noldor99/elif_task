@@ -2,7 +2,7 @@ import { useGetUserById } from "@/ahooks/useUser"
 
 import { useState } from "react"
 
-import { IconEdit, IconPlus } from "@tabler/icons-react"
+import { IconEdit } from "@tabler/icons-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,9 +17,10 @@ import { UserForm } from "./UserForm"
 
 interface DialogRoomProps {
   id?: string | undefined
+  boardId?: string | undefined
 }
 
-export function DialogUserForm({ id }: DialogRoomProps) {
+export function DialogUserForm({ id, boardId }: DialogRoomProps) {
   const { data: user, isFetched } = useGetUserById(id!)
   const [open, setOpen] = useState(false)
 
@@ -41,9 +42,8 @@ export function DialogUserForm({ id }: DialogRoomProps) {
             <IconEdit />
           </Button>
         ) : (
-          <Button variant="black_out">
-            <IconPlus className="mr-2" />
-            Add user
+          <Button variant="black_out" className="w-full">
+            Register
           </Button>
         )}
       </DialogTrigger>
@@ -56,7 +56,7 @@ export function DialogUserForm({ id }: DialogRoomProps) {
         {id ? (
           isFetched && <UserForm user={user} handleClose={handleOpenChange} />
         ) : (
-          <UserForm handleClose={handleOpenChange} />
+          <UserForm handleClose={handleOpenChange} boardId={boardId} />
         )}
       </DialogContent>
     </Dialog>

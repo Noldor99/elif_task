@@ -7,7 +7,6 @@ import { useEffect } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { DialogBoardForm } from "./_components/DialogBoardForm"
 import { Button } from "@/components/ui/button"
-import { DialogUserForm } from "./_components/DialogUserForm"
 import { SortVariant } from "@/actions/client/boardAction"
 import FilterSelect from "@/components/FilterSelect"
 
@@ -42,7 +41,6 @@ const Home = () => {
           />
         </div>
         <div className="flex justify-between items-center gap-4">
-          <DialogUserForm />
           <Button
             variant="black_out"
             onClick={() => navigate("/user")}

@@ -32,4 +32,5 @@ export class CreateBoardDto {
   @IsString()
   @Length(3, 255)
   readonly organizer: string;
+
 }

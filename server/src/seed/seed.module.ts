@@ -10,18 +10,20 @@ import { BoardModule } from 'src/board/board.module';
 import { UserModule } from 'src/user/user.module';
 import { UserSeed } from './generation/userSeed';
 
+
 @Module({
   imports: [
     DatabaseModule,
     TypeOrmModule.forFeature([Board, User]),
     BoardModule,
-    UserModule
+    UserModule,
+
   ],
   providers: [
     SeedService,
     ResetTotalDataSeed,
     BoardSeed,
-    UserSeed
+    UserSeed,
   ],
   exports: [SeedService]
 
